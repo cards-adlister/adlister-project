@@ -33,6 +33,26 @@ public class RegisterServlet extends HttpServlet {
             return;
         }
 
+        //check for duplicate username
+        boolean isDuplicateUsername = true;
+        if (DaoFactory.getUsersDao().findByUsername(username) == null){
+            isDuplicateUsername = false;
+        }
+        if(isDuplicateUsername){
+            response.sendRedirect("/register");
+            return;
+        }
+
+        //check for duplicate email
+        boolean isDuplicateEmail = true;
+        if (DaoFactory.getUsersDao().findByEmail(email) == null){
+            isDuplicateEmail = false;
+        }
+        if(isDuplicateEmail){
+            response.sendRedirect("/register");
+            return;
+        }
+
         // create and save a new user
         User user = new User(username, email, password);
         DaoFactory.getUsersDao().insert(user);
