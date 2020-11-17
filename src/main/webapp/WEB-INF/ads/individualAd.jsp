@@ -19,6 +19,7 @@
       <h1>${ad.title}</h1>
         <div>${ad.description}</div>
         <div>${user.username}</div>
+    <a href="/ads" class="btn btn-primary">Back to Ads</a>
 </div>
 </body>
 </html>
