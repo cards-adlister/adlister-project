@@ -19,6 +19,7 @@
 <form action="/delete/${ad.id}" method="POST">
     <div class="container">
         <h1>${ad.title}</h1>
+        <img src="${ad.image}" style="height: 300px; width: 300px">
         <div>${ad.description}</div>
         <input type="submit" class="btn btn-info" value="Delete">
     </div>
