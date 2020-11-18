@@ -23,12 +23,19 @@ public class RegisterServlet extends HttpServlet {
         String passwordConfirmation = request.getParameter("confirm_password");
 
         // validate input
-        boolean inputHasErrors = username.isEmpty()
-            || email.isEmpty()
-            || password.isEmpty()
-            || (! password.equals(passwordConfirmation));
-
-        if (inputHasErrors) {
+//        boolean inputHasErrors = username.isEmpty()
+//            || email.isEmpty()
+//            || password.isEmpty()
+//            || (! password.equals(passwordConfirmation));
+//
+//        if (inputHasErrors) {
+//            response.sendRedirect("/register");
+//            return;
+//        }
+        //check password and confirmation match
+        boolean passwordConfirmNotMatch = !password.equals(passwordConfirmation);
+        if (passwordConfirmNotMatch){
+            request.getSession().setAttribute("pwmessage", "Password and Password Confirmation do not match.");
             response.sendRedirect("/register");
             return;
         }
@@ -39,6 +46,7 @@ public class RegisterServlet extends HttpServlet {
             isDuplicateUsername = false;
         }
         if(isDuplicateUsername){
+            request.getSession().setAttribute("message", "Username is already taken.");
             response.sendRedirect("/register");
             return;
         }
@@ -49,6 +57,7 @@ public class RegisterServlet extends HttpServlet {
             isDuplicateEmail = false;
         }
         if(isDuplicateEmail){
+            request.getSession().setAttribute("emessage", "An account with that email already exists. Please login.");
             response.sendRedirect("/register");
             return;
         }
