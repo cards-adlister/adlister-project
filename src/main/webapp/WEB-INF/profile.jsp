@@ -16,6 +16,7 @@
     <c:forEach var="ad" items="${ads}">
         <div class="col-md-6">
             <h2><a href="/delete/${ad.id}">${ad.title}</a></h2>
+            <img src="${ad.image}"  style="height: 300px; width: 300px">
             <p>${ad.description}</p>
         </div>
     </c:forEach>
