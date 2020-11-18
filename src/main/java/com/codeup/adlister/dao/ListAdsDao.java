@@ -7,6 +7,7 @@ import java.util.List;
 
 public class ListAdsDao implements Ads {
     private List<Ad> ads;
+    private Ad ad;
 
     public List<Ad> all() {
         if (ads == null) {
@@ -29,6 +30,18 @@ public class ListAdsDao implements Ads {
         return ads;
     }
 
+    public void deleteAd(Ad ad) {
+        if (ads == null) {
+            ads = generateAds();
+        }
+    }
+
+    public Ad getAdByID(long ad_id) {
+        if (ads == null) {
+            ads = generateAds();
+        }
+        return ad;
+    }
 
     public Long insert(Ad ad) {
         // make sure we have ads
