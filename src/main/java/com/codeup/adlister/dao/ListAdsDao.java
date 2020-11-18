@@ -61,25 +61,29 @@ public class ListAdsDao implements Ads {
             1,
             1,
             "playstation for sale",
-            "This is a slightly used playstation"
+            "This is a slightly used playstation",
+            "https://www.pexels.com/photo/photo-of-play-station-game-console-and-remote-controller-4219883/"
         ));
         ads.add(new Ad(
             2,
             1,
             "Super Nintendo",
-            "Get your game on with this old-school classic!"
+            "Get your game on with this old-school classic!",
+                "https://www.pexels.com/photo/person-holding-white-snes-controller-776092/"
         ));
         ads.add(new Ad(
             3,
             2,
             "Junior Java Developer Position",
-            "Minimum 7 years of experience required. You will be working in the scripting language for Java, JavaScript"
+            "Minimum 7 years of experience required. You will be working in the scripting language for Java, JavaScript",
+                "https://www.pexels.com/photo/ballpen-blur-close-up-computer-461077/"
         ));
         ads.add(new Ad(
             4,
             2,
             "JavaScript Developer needed",
-            "Must have strong Java skills"
+            "Must have strong Java skills",
+                "https://www.pexels.com/photo/man-and-woman-near-table-3184465/"
         ));
         return ads;
     }
