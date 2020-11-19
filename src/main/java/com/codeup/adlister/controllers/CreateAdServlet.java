@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static java.lang.Double.parseDouble;
+
 @WebServlet(name = "controllers.CreateAdServlet", urlPatterns = "/ads/create")
 public class CreateAdServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -24,11 +26,14 @@ public class CreateAdServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         User user = (User) request.getSession().getAttribute("user");
+//        String currentPrice = request.getParameter("price");
+//        double price = Double.parseDouble(currentPrice);
         Ad ad = new Ad(
             user.getId(),
             request.getParameter("title"),
             request.getParameter("description"),
-            request.getParameter("image")
+            request.getParameter("image"),
+            Double.parseDouble(request.getParameter("price"))
         );
         DaoFactory.getAdsDao().insert(ad);
         response.sendRedirect("/ads");
