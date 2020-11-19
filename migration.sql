@@ -1,8 +1,10 @@
 USE adlister_db;
 
+SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS ads;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS categories;
+DROP TABLE IF EXISTS ad_category;
 
 CREATE TABLE users
 (
@@ -30,10 +32,16 @@ ALTER TABLE ads
 
 CREATE TABLE categories
 (
-    id   int(11) unsigned not null auto_increment,
-    name varchar(255)     not null,
+    id   int(11)        unsigned not null auto_increment,
+    name varchar(255)   not null,
     primary key (id)
 );
+
+INSERT INTO categories (name) VALUE ('Electronic');
+INSERT INTO categories (name) VALUES ('Card Deck');
+INSERT INTO categories (name) VALUES ('Boardgame');
+INSERT INTO categories (name) VALUES ('Miniatures');
+INSERT INTO categories (name) VALUES ('Role-Playing');
 
 CREATE TABLE ad_category
 (

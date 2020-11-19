@@ -38,6 +38,13 @@
                 <label for="image">Image</label>
                 <textarea id="image" name="image" class="form-control" type="text" aria-required="true" required></textarea>
             </div>
+            <div>
+                <h4>Select Categories: </h4>
+                <c:forEach var="category" items="${categories}">
+                    <input type="checkbox" name="category" id="category-${category.getId()}" value="${category.getId()}">
+                    <label for="category-${category.getId()}">${category.getName()}</label>
+                </c:forEach>
+            </div>
             <input type="submit" class="btn btn-block btn-primary">
         </form>
     </div>
