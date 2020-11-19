@@ -35,8 +35,6 @@ CREATE TABLE ad_category
 (
     ad_id       int(10) unsigned NOT NULL,
     category_id int(10) unsigned NOT NULL,
-    KEY ad_id_idx (ad_id),
-    KEY category_id_idx (category_id),
-    CONSTRAINT ad_id FOREIGN KEY (ad_id) REFERENCES ads (id) ON DELETE NO ACTION ON UPDATE NO ACTION,
-    CONSTRAINT category_id FOREIGN KEY (category_id) REFERENCES categories (id) ON DELETE NO ACTION ON UPDATE NO ACTION
+    FOREIGN KEY (ad_id) REFERENCES ads (id) ON DELETE NO ACTION ON UPDATE NO ACTION,
+    FOREIGN KEY (category_id) REFERENCES categories (id) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
