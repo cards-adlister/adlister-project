@@ -24,6 +24,10 @@ CREATE TABLE ads (
         ON DELETE CASCADE
 );
 
+ALTER TABLE ads
+    ADD price DOUBLE NOT NULL
+        AFTER image;
+
 CREATE TABLE categories
 (
     id   int(11) unsigned not null auto_increment,
