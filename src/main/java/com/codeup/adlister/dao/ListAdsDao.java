@@ -43,6 +43,12 @@ public class ListAdsDao implements Ads {
         return ad;
     }
 
+    public void updateAd(Ad ad) {
+        if (ads == null) {
+            ads = generateAds();
+        }
+    }
+
     public Long insert(Ad ad) {
         // make sure we have ads
         if (ads == null) {
