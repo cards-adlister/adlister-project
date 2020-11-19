@@ -3,9 +3,6 @@ package com.codeup.adlister.dao;
 import com.codeup.adlister.models.Ad;
 import com.mysql.cj.jdbc.Driver;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -63,13 +60,54 @@ public class MySQLAdsDao implements Ads {
     }
 
     @Override
+    public Ad getAdByID(long ad_id) {
+        PreparedStatement stmt;
+        try {
+            stmt = connection.prepareStatement("SELECT * FROM ads WHERE id = ? LIMIT 1");
+            stmt.setLong(1, ad_id);
+            ResultSet rs = stmt.executeQuery();
+            return createAdsFromResults(rs).get(0);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error retrieving all user ads.", e);
+        }
+    }
+
+    @Override
+    public void updateAd(Ad ad) {
+        PreparedStatement stmt;
+        try {
+            stmt = connection.prepareStatement("UPDATE ads SET title = ?, description = ?, image = ? WHERE id = ?");
+            stmt.setString(1, ad.getTitle());
+            stmt.setString(2, ad.getDescription());
+            stmt.setString(3, ad.getImage());
+            stmt.setLong(4, ad.getId());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error updating your ad");
+        }
+    }
+
+    @Override
+    public void deleteAd(Ad ad) {
+        PreparedStatement stmt;
+        try {
+            stmt = connection.prepareStatement("DELETE FROM ads WHERE id = ?");
+            stmt.setLong(1, ad.getId());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error deleting ad.", e);
+        }
+    }
+
+    @Override
     public Long insert(Ad ad) {
         try {
-            String insertQuery = "INSERT INTO ads(user_id, title, description) VALUES (?, ?, ?)";
+            String insertQuery = "INSERT INTO ads(user_id, title, description, image) VALUES (?, ?, ?, ?)";
             PreparedStatement stmt = connection.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
             stmt.setLong(1, ad.getUserId());
             stmt.setString(2, ad.getTitle());
             stmt.setString(3, ad.getDescription());
+            stmt.setString(4,ad.getImage());
             stmt.executeUpdate();
             ResultSet rs = stmt.getGeneratedKeys();
             rs.next();
@@ -84,7 +122,8 @@ public class MySQLAdsDao implements Ads {
             rs.getLong("id"),
             rs.getLong("user_id"),
             rs.getString("title"),
-            rs.getString("description")
+            rs.getString("description"),
+                rs.getString("image")
         );
     }
 

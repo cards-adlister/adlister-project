@@ -17,8 +17,9 @@
 <jsp:include page="/WEB-INF/partials/navbar.jsp" />
 <div class="container">
       <h1>${ad.title}</h1>
-        <div>${ad.description}</div>
-        <div>${user.username}</div>
+        <img src="${ad.image}" style="height: 300px; width: 300px" alt="${ad.title}">
+        <div>Description: ${ad.description}</div>
+        <div>Posted By: ${user.username}</div>
     <a href="/ads" class="btn btn-primary">Back to Ads</a>
 </div>
 </body>
