@@ -40,17 +40,17 @@
 
             <input type="submit" class="btn btn-primary btn-block">
         </form>
+        <%--// list through error messages and display the correct one--%>
+        <c:if test="${requestScope.listOfErrors.size() > 0}">
+            <div id="errors" class="alert alert-danger">
+                <p>Unable to register user!</p>
+                <ul>
+                    <c:forEach var="message" items="${requestScope.listOfErrors}">
+                        <li><c:out value="${message}"></c:out></li>
+                    </c:forEach>
+                </ul>
+            </div>
+        </c:if>
     </div>
-    <%--// list through error messages and display the correct one--%>
-    <c:if test="${sessionScope.listOfErrors.size() > 0}">
-        <div id="errors" class="alert alert-danger">
-            <p>Unable to register user!</p>
-            <ul>
-                <c:forEach var="message" items="${listOfErrors}">
-                    <li><c:out value="${message}"></c:out></li>
-                </c:forEach>
-            </ul>
-        </div>
-    </c:if>
 </body>
 </html>

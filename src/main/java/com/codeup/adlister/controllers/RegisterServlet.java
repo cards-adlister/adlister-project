@@ -17,6 +17,10 @@ import java.util.ArrayList;
 @WebServlet(name = "controllers.RegisterServlet", urlPatterns = "/register")
 public class RegisterServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (request.getSession().getAttribute("user") != null) {
+            response.sendRedirect("/profile");
+            return;
+        }
         request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
     }
 
@@ -25,28 +29,39 @@ public class RegisterServlet extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String passwordConfirmation = request.getParameter("confirm_password");
-        HttpSession session = request.getSession(true);
-        session.getAttributeNames();
 
+        //validate input
         boolean hasInputErrors = false;
 
+        //List of possible errors & responses
         ArrayList<String> listOfErrors = new ArrayList<>();
+
+        //check for errors
         if(username.isEmpty()){
             String usernameIsEmpty = "You must enter an username.";
             listOfErrors.add(usernameIsEmpty);
             hasInputErrors = true;
+        } else {
+            User user = DaoFactory.getUsersDao().findByUsername(username);
+            if(user != null){
+                listOfErrors.add("That username is already in use.");
+            }
         }
         if(email.isEmpty()){
             String emailIsEmpty = "You must enter a valid email.";
             listOfErrors.add(emailIsEmpty);
             hasInputErrors = true;
+        } else  {
+            User user = DaoFactory.getUsersDao().findByEmail(email);
+            if (user != null){
+                listOfErrors.add("An account with that email address already exists. Please login.");
+            }
         }
         if(password.isEmpty()){
             String passwordIsEmpty = "You must enter a password.";
             listOfErrors.add(passwordIsEmpty);
             hasInputErrors = true;
         }
-        //check password and confirmation match
 
         if (!password.equals(passwordConfirmation)){
             String passwordDontMatch = "Your passwords don't match.";
@@ -54,30 +69,8 @@ public class RegisterServlet extends HttpServlet {
             hasInputErrors = true;
         }
 
-        //check for duplicate username
-        boolean isDuplicateUsername = true;
-        if (DaoFactory.getUsersDao().findByUsername(username) == null){
-            isDuplicateUsername = false;
-        }
-        if(isDuplicateUsername){
-            String isDuplicateUser = "That username is already in use.";
-            listOfErrors.add(isDuplicateUser);
-            hasInputErrors = true;
-        }
-
-        //check for duplicate email
-        boolean isDuplicateEmail = true;
-        if (DaoFactory.getUsersDao().findByEmail(email) == null){
-            isDuplicateEmail = false;
-        }
-        if(isDuplicateEmail){
-            String emailIsDuplicate = "An account with that email address already exists. Please login.";
-            listOfErrors.add(emailIsDuplicate);
-            hasInputErrors = true;
-        }
-
         if(hasInputErrors){
-            request.getSession().setAttribute("listOfErrors", listOfErrors);
+            request.setAttribute("listOfErrors", listOfErrors);
             request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
         } else {
             // create and save a new user
