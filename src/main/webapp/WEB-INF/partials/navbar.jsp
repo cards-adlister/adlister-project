@@ -15,6 +15,7 @@
                             <input type="submit" >
                         </form>
                         </li>
+                        <li><a href="/ads/create">Create Ad</a></li>
                         <li><a href="/profile">${sessionScope.user.username}</a> </li>
                         <li><a href="/logout">Logout</a></li>
                     </c:when>
