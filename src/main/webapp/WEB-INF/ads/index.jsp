@@ -21,6 +21,7 @@
                     <p class="card-text">${ad.description}</p>
                     <a href="/ad/${loop.index + 1}" class="btn btn-primary">View Info</a>
                 </div>
+                <br>
             </div>
         </div>
     </c:forEach>
