@@ -14,6 +14,10 @@ import java.io.IOException;
 @WebServlet(name = "controllers.LoginServlet", urlPatterns = "/login")
 public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        //will redirect to external page if someone goes directly to the login page from external site
+        request.getSession().setAttribute("referer", request.getHeader("referer"));
+
         if (request.getSession().getAttribute("user") != null) {
             response.sendRedirect("/profile");
             return;
@@ -35,7 +39,8 @@ public class LoginServlet extends HttpServlet {
 
         if (validAttempt) {
             request.getSession().setAttribute("user", user);
-            response.sendRedirect("/profile");
+            System.out.println(request.getHeader("referer"));
+            response.sendRedirect((String) request.getSession().getAttribute("referer"));
         } else {
             response.sendRedirect("/login");
         }
