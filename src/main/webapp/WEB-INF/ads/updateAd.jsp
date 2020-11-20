@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: courtneyholley
@@ -36,6 +37,13 @@
             <label for="image">Image</label>
             <textarea id="image" name="image" class="form-control"
                       type="text">${ad.image}</textarea>
+        </div>
+        <div>
+            <h4>Select Categories: </h4>
+            <c:forEach var="category" items="${categories}">
+                <input type="checkbox" name="category" id="category-${category.getId()}" value="${category.getId()}">
+                <label for="category-${category.getId()}">${category.getName()}</label>
+            </c:forEach>
         </div>
         <input name="ad_id" type="hidden" value=${ad.id}>
         <button type="submit" class="btn btn-primary">Submit</button>
