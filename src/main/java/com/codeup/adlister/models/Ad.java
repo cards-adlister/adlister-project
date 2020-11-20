@@ -1,6 +1,7 @@
 package com.codeup.adlister.models;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Ad {
     private long id;
@@ -8,6 +9,7 @@ public class Ad {
     private String title;
     private String description;
     private String image;
+    private List<Category> categories;
 
     public Ad(long id, long userId, String title, String description, String image) {
         this.id = id;
@@ -59,4 +61,8 @@ public class Ad {
     public String getImage() { return this.image; }
 
     public void setImage(String image){ this.image = image; }
+
+    public List<Category> getCategories() { return this.categories; }
+
+    public void addCategory(Category category) { this.categories.add(category); }
 }

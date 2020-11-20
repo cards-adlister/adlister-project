@@ -17,4 +17,6 @@ public interface Ads {
     void deleteAd(Ad ad);
     Ad getAdByID(long ad_id);
     public void updateAd(Ad ad);
+    public List<Ad> getAdsWithCategory(int categoryId);
+    public List<Ad> searchAds(String search);
 }
