@@ -71,7 +71,7 @@ public class MySQLCategoriesDao implements Categories {
     public List<Category> getCategoriesWithAd(int adId) {
         List<Category> categories = new ArrayList<>();
         try {
-            String query = "select * from categories where id in ( select category_id from category_ad_pivot where ad_id = ? )";
+            String query = "select * from categories where id in ( select category_id from ad_category where ad_id = ? )";
             PreparedStatement stmt = connection.prepareStatement(query);
             stmt.setInt(1, adId);
             ResultSet rs = stmt.executeQuery();
