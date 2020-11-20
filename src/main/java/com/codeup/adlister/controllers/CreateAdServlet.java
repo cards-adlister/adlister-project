@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import static java.lang.Double.parseDouble;
 
@@ -26,8 +27,11 @@ public class CreateAdServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         User user = (User) request.getSession().getAttribute("user");
-//        String currentPrice = request.getParameter("price");
-//        double price = Double.parseDouble(currentPrice);
+//        String title = request.getParameter("title");
+//        String description = request.getParameter("description");
+//        String image = request.getParameter("image");
+//        Double price = Double.parseDouble(request.getParameter("price"));
+
         Ad ad = new Ad(
             user.getId(),
             request.getParameter("title"),

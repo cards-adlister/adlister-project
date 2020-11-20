@@ -23,30 +23,34 @@
 %>
 <div class="container">
     <h1>Please fill in your information.</h1>
-    <form action="/updateProfile" method="post">
+    <form action="/updateUsername" method="post">
         <div class="form-group">
-            <label for="username">Username</label>
-            <input id="username" name="username" class="form-control" type="text" value="<%=username%>" aria-required="true" placeholder="Prior username: ${user.username}" required>
-            <p class="text-danger">
-                <c:out value="${sessionScope.message}"/>
-                <c:remove var="message" scope="session"/>
-            </p>
+            <label for="username">Change Username</label>
+            <input id="username" name="username" class="form-control w-75" type="text" value="<%=username%>" aria-required="true" placeholder="Current username: ${user.username}">
         </div>
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input id="email" name="email" class="form-control" type="text" value="<%=email%>" aria-required="true" placeholder="Prior email: ${user.email}" required>
-        </div>
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input id="password" name="password" class="form-control" type="password" aria-required="true" required>
-        </div>
-        <div class="form-group">
-            <label for="confirm_password">Confirm Password</label>
-            <input id="confirm_password" name="confirm_password" class="form-control" type="password" aria-required="true" required>
-        </div>
-
         <input type="submit" class="btn btn-primary btn-block">
     </form>
+    <br><br>
+    <form action="/updateEmail">
+        <div class="form-group">
+            <label for="email">Change Email</label>
+            <input id="email" name="email" class="form-control" type="text" value="<%=email%>" aria-required="true" placeholder="Current email: ${user.email}" >
+        </div>
+        <input type="submit" class="btn btn-primary btn-block">
+    </form>
+    <br><br>
+    <form action="/updatePassword">
+        <div class="form-group">
+            <label for="password">Change Password</label>
+            <input id="password" name="password" class="form-control" type="password" aria-required="true" placeholder="enter new password">
+        </div>
+        <div class="form-group">
+            <label for="confirm_password"></label>
+            <input id="confirm_password" name="confirm_password" class="form-control" type="password" aria-required="true" placeholder="enter new password again to confirm">
+        </div>
+        <input type="submit" class="btn btn-primary btn-block">
+    </form>
+
     <%--// list through error messages and display the correct one--%>
     <c:if test="${requestScope.listOfErrors.size() > 0}">
         <div id="errors" class="alert alert-danger">

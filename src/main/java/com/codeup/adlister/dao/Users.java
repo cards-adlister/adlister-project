@@ -9,5 +9,10 @@ public interface Users {
     Long insert(User user);
     User findByEmail(String email);
     User findById(long id);
-    public void updateUser(User user);
+
+    void updateUser(User user);
+
+    void updateUsername(User profile);
+    void updateEmail(User profile);
+    void updatePassword(User profile);
 }
