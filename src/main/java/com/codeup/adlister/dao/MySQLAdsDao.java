@@ -14,9 +14,9 @@ public class MySQLAdsDao implements Ads {
         try {
             DriverManager.registerDriver(new Driver());
             connection = DriverManager.getConnection(
-                config.getUrl(),
-                config.getUser(),
-                config.getPassword()
+                    config.getUrl(),
+                    config.getUser(),
+                    config.getPassword()
             );
         } catch (SQLException e) {
             throw new RuntimeException("Error connecting to the database!", e);
@@ -39,7 +39,7 @@ public class MySQLAdsDao implements Ads {
     public List<Ad> userAds(long userId) {
         PreparedStatement stmt = null;
         try {
-            stmt = connection.prepareStatement("SELECT * FROM ads WHERE user_id = '"+userId+"'");
+            stmt = connection.prepareStatement("SELECT * FROM ads WHERE user_id = '" + userId + "'");
             ResultSet rs = stmt.executeQuery();
             return createAdsFromResults(rs);
         } catch (SQLException e) {
@@ -54,7 +54,7 @@ public class MySQLAdsDao implements Ads {
             stmt = connection.prepareStatement("SELECT * FROM ads WHERE id = " + adId);
             ResultSet rs = stmt.executeQuery();
             return createAdFromResults(rs);
-        } catch (SQLException e){
+        } catch (SQLException e) {
             throw new RuntimeException("Error retrieving all ads.", e);
         }
     }
@@ -108,8 +108,12 @@ public class MySQLAdsDao implements Ads {
             stmt.setLong(1, ad.getUserId());
             stmt.setString(2, ad.getTitle());
             stmt.setString(3, ad.getDescription());
+<<<<<<< HEAD
+            stmt.setString(4, ad.getImage());
+=======
             stmt.setString(4,ad.getImage());
             stmt.setDouble(5,ad.getPrice());
+>>>>>>> a372774b651743c1ac0ddd863a2f9821e091700f
             stmt.executeUpdate();
             ResultSet rs = stmt.getGeneratedKeys();
             rs.next();
@@ -121,12 +125,20 @@ public class MySQLAdsDao implements Ads {
 
     private Ad extractAd(ResultSet rs) throws SQLException {
         return new Ad(
+<<<<<<< HEAD
+                rs.getLong("id"),
+                rs.getLong("user_id"),
+                rs.getString("title"),
+                rs.getString("description"),
+                rs.getString("image")
+=======
             rs.getLong("id"),
             rs.getLong("user_id"),
             rs.getString("title"),
             rs.getString("description"),
             rs.getString("image"),
             rs.getDouble("price")
+>>>>>>> a372774b651743c1ac0ddd863a2f9821e091700f
         );
     }
 
@@ -191,8 +203,55 @@ public class MySQLAdsDao implements Ads {
             ResultSet rs = stmt.executeQuery();
             return createAdsFromResults(rs);
         } catch (SQLException e) {
-            throw new RuntimeException("Error retrieving all ads.", e);
+            throw new RuntimeException("No ads matched your search.", e);
         }
     }
 
 }
+//    public List<Ad> searchAds(String search) throws SQLException {
+//        List<Ad> adList = new ArrayList<>();
+//        String sqlQuery = "SELECT id FROM ads WHERE title LIKE ?";
+//        try{
+//            PreparedStatement stmt = connection.prepareStatement(sqlQuery, Statement.NO_GENERATED_KEYS);
+//            stmt.setString(1, "%" + search + "%");
+//            stmt.executeQuery();
+//            ResultSet rs = stmt.getResultSet();
+//            rs.next();
+////            return rs.getString(1);
+//            while (rs.next()) {
+//                adList.add(findUniqueAdId(rs.getLong("id")));
+//            }
+//        }catch (RuntimeException e){
+//            throw new RuntimeException("No ads matched search.", e);
+//        }
+//            return adList;
+//    }
+//
+//
+//    public Ad findUniqueAdId(Long ad) {
+//        String query = "SELECT * FROM ads WHERE id = ? LIMIT 1";
+//        try {
+//            PreparedStatement stmt = connection.prepareStatement(query);
+//            stmt.setLong(1, ad);
+//            ResultSet rs = stmt.executeQuery();
+//            if (!rs.next()) {
+//                return null;
+//            }
+//            return extractAd(rs);
+//        } catch (RuntimeException | SQLException e) {
+//            throw new RuntimeException("Error finding Ad ID", e);
+//        }
+//    }
+
+//        String query = "SELECT * FROM ads WHERE title LIKE ?";
+//        String searchWithWildCards = "%" + title + "%";
+//        try{
+//            PreparedStatement stmt = connection.prepareStatement(query);
+//            stmt.setString(1, searchWithWildCards);
+//            ResultSet rs = stmt.executeQuery();
+//            return (List<Ad>) (rs = stmt.executeQuery());
+//        }catch (SQLException e){
+//            throw new RuntimeException("No ad title matched your search.", e);
+//        }
+//    }
+
