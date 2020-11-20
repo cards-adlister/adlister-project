@@ -9,4 +9,5 @@ public interface Users {
     Long insert(User user);
     User findByEmail(String email);
     User findById(long id);
+    public void updateUser(User user);
 }

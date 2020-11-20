@@ -10,20 +10,24 @@ public class Ad {
     private String description;
     private String image;
     private List<Category> categories;
+    private double price;
 
-    public Ad(long id, long userId, String title, String description, String image) {
+
+    public Ad(long id, long userId, String title, String description, String image, double price) {
         this.id = id;
         this.userId = userId;
         this.title = title;
         this.description = description;
         this.image = image;
+        this.price = price;
     }
 
-    public Ad(long userId, String title, String description, String image) {
+    public Ad(long userId, String title, String description, String image, double price) {
         this.userId = userId;
         this.title = title;
         this.description = description;
         this.image = image;
+        this.price = price;
     }
 
     public long getId() {
@@ -65,4 +69,9 @@ public class Ad {
     public List<Category> getCategories() { return this.categories; }
 
     public void addCategory(Category category) { this.categories.add(category); }
+
+    public double getPrice() { return this.price; }
+
+    public void setPrice(double price) { this.price = price; }
+
 }

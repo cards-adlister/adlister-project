@@ -28,6 +28,11 @@
                       type="text" required>${ad.description}</textarea>
         </div>
         <div class="form-group">
+            <label for="price">Price</label>
+            <textarea id="price" name="price" class="form-control"
+                      type="text" required>${ad.price}</textarea>
+        </div>
+        <div class="form-group">
             <label for="image">Image</label>
             <textarea id="image" name="image" class="form-control"
                       type="text">${ad.image}</textarea>

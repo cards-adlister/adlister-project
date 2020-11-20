@@ -8,7 +8,7 @@ import java.sql.*;
 public class MySQLUsersDao implements Users {
     private Connection connection;
 
-    public MySQLUsersDao(com.codeup.adlister.dao.Config config) {
+    public MySQLUsersDao(Config config) {
         try {
             DriverManager.registerDriver(new Driver());
             connection = DriverManager.getConnection(
@@ -72,6 +72,21 @@ public class MySQLUsersDao implements Users {
             return rs.getLong(1);
         } catch (SQLException e) {
             throw new RuntimeException("Error creating new user", e);
+        }
+    }
+
+    public void updateUser(User user){
+
+        String query = "UPDATE USERS SET username = ?,email = ?,password = ? WHERE id = ?";
+        try{
+            PreparedStatement stmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            stmt.setString(1, user.getUsername());
+            stmt.setString(2, user.getEmail());
+            stmt.setString(3, user.getPassword());
+            stmt.setLong(4, user.getId());
+            stmt.executeUpdate();
+        } catch (SQLException e){
+            throw new RuntimeException("Error updating profile", e);
         }
     }
 

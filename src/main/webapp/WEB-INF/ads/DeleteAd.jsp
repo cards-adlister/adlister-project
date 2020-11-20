@@ -7,6 +7,7 @@
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
     <jsp:include page="/WEB-INF/partials/head.jsp">
@@ -22,13 +23,11 @@
             <h1>${ad.title}</h1>
             <img src="${ad.image}" style="height: 300px; width: 300px">
             <div>${ad.description}</div>
+            <div><fmt:formatNumber value = "${ad.price}" type = "currency"/></div>
             <input type="submit" class="btn btn-info" value="Delete">
             <a href="/update/${ad.id}"><button class="btn btn-info" type="button">Update</button></a>
         </div>
     </form>
-<%--    <form action="/update/${ad.id}" method="POST" style="margin-left: 15px">--%>
-<%--        <input type="submit" class="btn btn-info" value="Update">--%>
-<%--    </form>--%>
 </div>
 </body>
 </html>
