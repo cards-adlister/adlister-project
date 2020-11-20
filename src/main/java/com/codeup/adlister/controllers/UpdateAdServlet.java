@@ -33,15 +33,13 @@ public class UpdateAdServlet extends HttpServlet {
         String title_update = request.getParameter("title");
         String description_update = request.getParameter("description");
         String image_update = request.getParameter("image");
-
-        if (title_update.isEmpty() || description_update.isEmpty()) {
-
-        }
+        double price_update = Double.parseDouble(request.getParameter("price"));
 
         ad.setId(adId);
         ad.setTitle(title_update);
         ad.setDescription(description_update);
         ad.setImage(image_update);
+        ad.setPrice(price_update);
         DaoFactory.getAdsDao().updateAd(ad);
         response.sendRedirect("/profile");
     }
