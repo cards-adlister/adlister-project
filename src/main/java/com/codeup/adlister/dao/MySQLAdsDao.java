@@ -108,7 +108,7 @@ public class MySQLAdsDao implements Ads {
             stmt.setLong(1, ad.getUserId());
             stmt.setString(2, ad.getTitle());
             stmt.setString(3, ad.getDescription());
-            stmt.setString(4,ad.getImage());
+            stmt.setString(4, ad.getImage());
             stmt.setDouble(5,ad.getPrice());
             stmt.executeUpdate();
             ResultSet rs = stmt.getGeneratedKeys();
@@ -150,16 +150,18 @@ public class MySQLAdsDao implements Ads {
     public List<Ad> getAdsWithCategory(int categoryId) {
         List<Ad> ads = new ArrayList<>();
         try {
-            String query = "select * from ads where id in ( select ad_id from category_ad_pivot where category_id = ? )";
+            String query = "select * from ads where id in ( select ad_id from ad_category where category_id = ? )";
             PreparedStatement stmt = connection.prepareStatement(query);
             stmt.setLong(1, categoryId);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 ads.add(new Ad(
                         rs.getLong("id"),
-                        rs.getString("user_id"),
+                        rs.getLong("userId"),
                         rs.getString("title"),
-                        rs.getString("description")
+                        rs.getString("description"),
+                        rs.getString("image"),
+                        rs.getDouble("price")
                 ));
             }
         } catch (SQLException e) {
@@ -196,50 +198,5 @@ public class MySQLAdsDao implements Ads {
     }
 
 }
-//    public List<Ad> searchAds(String search) throws SQLException {
-//        List<Ad> adList = new ArrayList<>();
-//        String sqlQuery = "SELECT id FROM ads WHERE title LIKE ?";
-//        try{
-//            PreparedStatement stmt = connection.prepareStatement(sqlQuery, Statement.NO_GENERATED_KEYS);
-//            stmt.setString(1, "%" + search + "%");
-//            stmt.executeQuery();
-//            ResultSet rs = stmt.getResultSet();
-//            rs.next();
-////            return rs.getString(1);
-//            while (rs.next()) {
-//                adList.add(findUniqueAdId(rs.getLong("id")));
-//            }
-//        }catch (RuntimeException e){
-//            throw new RuntimeException("No ads matched search.", e);
-//        }
-//            return adList;
-//    }
-//
-//
-//    public Ad findUniqueAdId(Long ad) {
-//        String query = "SELECT * FROM ads WHERE id = ? LIMIT 1";
-//        try {
-//            PreparedStatement stmt = connection.prepareStatement(query);
-//            stmt.setLong(1, ad);
-//            ResultSet rs = stmt.executeQuery();
-//            if (!rs.next()) {
-//                return null;
-//            }
-//            return extractAd(rs);
-//        } catch (RuntimeException | SQLException e) {
-//            throw new RuntimeException("Error finding Ad ID", e);
-//        }
-//    }
 
-//        String query = "SELECT * FROM ads WHERE title LIKE ?";
-//        String searchWithWildCards = "%" + title + "%";
-//        try{
-//            PreparedStatement stmt = connection.prepareStatement(query);
-//            stmt.setString(1, searchWithWildCards);
-//            ResultSet rs = stmt.executeQuery();
-//            return (List<Ad>) (rs = stmt.executeQuery());
-//        }catch (SQLException e){
-//            throw new RuntimeException("No ad title matched your search.", e);
-//        }
-//    }
 
