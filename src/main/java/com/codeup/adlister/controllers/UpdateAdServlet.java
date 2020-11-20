@@ -22,6 +22,7 @@ public class UpdateAdServlet extends HttpServlet {
             adId = Long.parseLong(selectedAd.substring(1));
             ad = DaoFactory.getAdsDao().getAdByID(adId);
             request.setAttribute("ad", ad);
+            request.setAttribute("categories", DaoFactory.getCategoriesDao().all());
             request.getRequestDispatcher("/WEB-INF/ads/updateAd.jsp").forward(request, response);
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             request.getRequestDispatcher("/WEB-INF/profile.jsp").forward(request, response);
@@ -34,6 +35,7 @@ public class UpdateAdServlet extends HttpServlet {
         String description_update = request.getParameter("description");
         String image_update = request.getParameter("image");
         double price_update = Double.parseDouble(request.getParameter("price"));
+        String[] categories = request.getParameterValues("category");
 
         ad.setId(adId);
         ad.setTitle(title_update);
@@ -41,6 +43,9 @@ public class UpdateAdServlet extends HttpServlet {
         ad.setImage(image_update);
         ad.setPrice(price_update);
         DaoFactory.getAdsDao().updateAd(ad);
+        for (String catId : categories) {
+            DaoFactory.getAdsDao().linkAdToCategory(DaoFactory.getAdsDao().all().size(), Integer.parseInt(catId));
+        }
         response.sendRedirect("/profile");
     }
 }

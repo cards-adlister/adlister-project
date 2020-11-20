@@ -18,8 +18,6 @@ public class IndividualAdServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        User currentUser = (User) request.getSession().getAttribute("user");
-//        request.setAttribute("user", DaoFactory.getAdsDao().userAds(currentUser.getId()));
 
         String selectedAd = request.getPathInfo();
 
@@ -29,17 +27,12 @@ public class IndividualAdServlet extends HttpServlet {
             Ad ad = DaoFactory.getAdsDao().all().get(adId - 1);
             request.setAttribute("ad", ad);
             request.setAttribute("user", DaoFactory.getUsersDao().findById(ad.getUserId()));
+            request.setAttribute("categories", DaoFactory.getCategoriesDao().getCategoriesWithAd(adId));
             request.getRequestDispatcher("/WEB-INF/ads/individualAd.jsp").forward(request, response);
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             request.setAttribute("error", "Requested invalid ad listing!");
             request.getRequestDispatcher("/WEB-INF/ads/index.jsp").forward(request, response);
         }
 
-//        Ad currentAd = (Ad) request.getSession().getAttribute("ad");
-//        request.setAttribute("ads", DaoFactory.getAdsDao().individualAd(currentAd.getId()));
-////            request.setAttribute("ads", DaoFactory.getAdsDao().all());
-//            request.getRequestDispatcher("/WEB-INF/ads/individualAd.jsp").forward(request, response);
-//        }
-//    }
     }
 }
