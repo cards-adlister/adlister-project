@@ -10,9 +10,9 @@
             <ul class="nav navbar-nav navbar-right">
                 <c:choose>
                     <c:when test="${sessionScope.user != null}">
-                        <li><form role="search" action="/search" method="GET">
-                            <input type="search" name="search"/>
-                            <input type="submit" >
+                        <li><form action="/ads/search" class="form-inline" role="search" method="GET">
+                            <input id="search" name="search" class="form-control" type="search" placeholder="Search Ads"/>
+                            <button class="btn btn=outline-success" type="submit"><i class="fas fa-search">Search</i></button>
                         </form>
                         </li>
                         <li><a href="/ads/create">Create Ad</a></li>

@@ -49,6 +49,11 @@ public class ListAdsDao implements Ads {
         }
     }
 
+    @Override
+    public List<Ad> searchAds(String title) {
+        return null;
+    }
+
     public Long insert(Ad ad) {
         // make sure we have ads
         if (ads == null) {
