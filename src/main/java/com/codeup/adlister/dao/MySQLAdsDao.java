@@ -145,4 +145,54 @@ public class MySQLAdsDao implements Ads {
         ad.add(extractAd(rs));
         return ad;
     }
+
+    @Override
+    public List<Ad> getAdsWithCategory(int categoryId) {
+        List<Ad> ads = new ArrayList<>();
+        try {
+            String query = "select * from ads where id in ( select ad_id from category_ad_pivot where category_id = ? )";
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setLong(1, categoryId);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                ads.add(new Ad(
+                        rs.getLong("id"),
+                        rs.getString("user_id"),
+                        rs.getString("title"),
+                        rs.getString("description")
+                ));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error getting ads from category", e);
+        }
+        return ads;
+    }
+
+    public long linkAdToCategory(int adId, int catId) {
+        try {
+            String query = "INSERT INTO ad_category (ad_id, category_id) VALUES (?, ?)";
+            PreparedStatement stmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            stmt.setInt(1, adId);
+            stmt.setInt(2, catId);
+            return (long) stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Could not link ad to category!", e);
+        }
+    }
+
+    @Override
+    public List<Ad> searchAds(String search) {
+        try {
+            String select = "SELECT * FROM ads where description LIKE CONCAT(\"%\", ?, \"%\") or title LIKE CONCAT(\"%\", ?, \"%\")";
+            PreparedStatement stmt = connection.prepareStatement(select);
+            stmt.setString(1, search);
+            stmt.setString( 2, search);
+            ResultSet rs = stmt.executeQuery();
+            return createAdsFromResults(rs);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error retrieving all ads.", e);
+        }
+    }
+
 }
