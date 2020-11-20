@@ -20,22 +20,29 @@ public class CreateAdServlet extends HttpServlet {
             response.sendRedirect("/login");
             return;
         }
+        request.setAttribute("categories", DaoFactory.getCategoriesDao().all());
         request.getRequestDispatcher("/WEB-INF/ads/create.jsp")
             .forward(request, response);
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+
+        String[] categories = request.getParameterValues("category");
         User user = (User) request.getSession().getAttribute("user");
-//        String currentPrice = request.getParameter("price");
-//        double price = Double.parseDouble(currentPrice);
+
         Ad ad = new Ad(
-            user.getId(),
-            request.getParameter("title"),
-            request.getParameter("description"),
-            request.getParameter("image"),
-            Double.parseDouble(request.getParameter("price"))
+                user.getId(),
+                request.getParameter("title"),
+                request.getParameter("description"),
+                request.getParameter("image"),
+                Double.parseDouble(request.getParameter("price"))
         );
+
         DaoFactory.getAdsDao().insert(ad);
+        for (String catId : categories) {
+
+            DaoFactory.getAdsDao().linkAdToCategory(DaoFactory.getAdsDao().all().size(), Integer.parseInt(catId));
+        }
         response.sendRedirect("/ads");
     }
 }
