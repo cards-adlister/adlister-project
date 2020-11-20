@@ -186,7 +186,7 @@ public class MySQLAdsDao implements Ads {
     @Override
     public List<Ad> searchAds(String search) {
         try {
-            String select = "SELECT * FROM ads where description LIKE CONCAT(\"%\", ?, \"%\") or title LIKE CONCAT(\"%\", ?, \"%\")";
+            String select = "SELECT * FROM ads where description LIKE CONCAT('%', ?, '%') or title LIKE CONCAT('%', ?, '%')";
             PreparedStatement stmt = connection.prepareStatement(select);
             stmt.setString(1, search);
             stmt.setString( 2, search);
