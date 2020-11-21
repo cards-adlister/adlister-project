@@ -24,5 +24,6 @@
         </div>
     </c:forEach>
 
+    <jsp:include page="/WEB-INF/partials/scripts.jsp" />
 </body>
 </html>
