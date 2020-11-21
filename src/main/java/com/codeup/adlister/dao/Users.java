@@ -12,7 +12,9 @@ public interface Users {
 
     void updateUser(User user);
 
-    void updateUsername(User profile);
-    void updateEmail(User profile);
-    void updatePassword(User profile);
+    void updateUsername(String profile, String userId);
+
+    void updatePassword(String password, String userId);
+
+    void updateEmail(String newEmail, String userId);
 }

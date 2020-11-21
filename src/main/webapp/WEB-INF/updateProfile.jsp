@@ -22,24 +22,37 @@
     if (email == null) email = "";
 %>
 <div class="container">
-    <h1>Please fill in your information.</h1>
+
+    <h1>Profile information: </h1>
+    <%--    Display error message--%>
+    <c:if test="${requestScope.listOfErrors.size() > 0}">
+        <ul id="errors" class="alert alert-danger">
+            <c:forEach var="message" items="${requestScope.listOfErrors}">
+                <li><c:out value="${message}"></c:out></li>
+            </c:forEach>
+        </ul>
+    </c:if>
     <form action="/updateUsername" method="post">
+        <input type="hidden" name="userId" value="${user.id}">
         <div class="form-group">
             <label for="username">Change Username</label>
-            <input id="username" name="username" class="form-control w-75" type="text" value="<%=username%>" aria-required="true" placeholder="Current username: ${user.username}">
+            <input id="username" name="username" class="form-control w-75" type="text" value="${user.username}">
         </div>
-        <input type="submit" class="btn btn-primary btn-block">
+        <input type="submit" class="btn btn-primary btn-block" value="Update Username">
     </form>
+
     <br><br>
-    <form action="/updateEmail">
+    <form action="/updateEmail" method="post">
+        <input type="hidden" name="userId" value="${user.id}">
         <div class="form-group">
             <label for="email">Change Email</label>
-            <input id="email" name="email" class="form-control" type="text" value="<%=email%>" aria-required="true" placeholder="Current email: ${user.email}" >
+            <input id="email" name="email" class="form-control" type="text" value="${user.email}" >
         </div>
-        <input type="submit" class="btn btn-primary btn-block">
+        <input type="submit" class="btn btn-primary btn-block" value="Update Email">
     </form>
     <br><br>
-    <form action="/updatePassword">
+    <form action="/updatePassword" method="post">
+        <input type="hidden" name="userId" value="${user.id}">
         <div class="form-group">
             <label for="password">Change Password</label>
             <input id="password" name="password" class="form-control" type="password" aria-required="true" placeholder="enter new password">
@@ -48,20 +61,8 @@
             <label for="confirm_password"></label>
             <input id="confirm_password" name="confirm_password" class="form-control" type="password" aria-required="true" placeholder="enter new password again to confirm">
         </div>
-        <input type="submit" class="btn btn-primary btn-block">
+        <input type="submit" class="btn btn-primary btn-block" value="Change Password">
     </form>
-
-    <%--// list through error messages and display the correct one--%>
-    <c:if test="${requestScope.listOfErrors.size() > 0}">
-        <div id="errors" class="alert alert-danger">
-            <p>Unable to register user!</p>
-            <ul>
-                <c:forEach var="message" items="${requestScope.listOfErrors}">
-                    <li><c:out value="${message}"></c:out></li>
-                </c:forEach>
-            </ul>
-        </div>
-    </c:if>
 </div>
 </body>
 </html>

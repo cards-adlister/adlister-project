@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
-@WebServlet(name = "UpdateEmailServlet")
+@WebServlet(name = "UpdateEmailServlet", urlPatterns = "/updateEmail")
 public class UpdateEmailServlet extends HttpServlet {
     User profile;
     long profileId;
@@ -28,6 +28,7 @@ public class UpdateEmailServlet extends HttpServlet {
         }
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String userId = request.getParameter("userId");
         String newEmail = request.getParameter("email");
         //validate input
         boolean hasInputErrors = false;
@@ -51,8 +52,7 @@ public class UpdateEmailServlet extends HttpServlet {
             request.setAttribute("listOfErrors", listOfErrors);
             request.getRequestDispatcher("/WEB-INF/updateProfile.jsp").forward(request, response);
         } else {
-            profile.setUsername(newEmail);
-            DaoFactory.getUsersDao().updateEmail(profile);
+            DaoFactory.getUsersDao().updateEmail(newEmail, userId);
             response.sendRedirect("/login");
         }
     }

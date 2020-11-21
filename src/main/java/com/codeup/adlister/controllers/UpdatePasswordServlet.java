@@ -2,6 +2,7 @@ package com.codeup.adlister.controllers;
 
 import com.codeup.adlister.dao.DaoFactory;
 import com.codeup.adlister.models.User;
+import com.codeup.adlister.util.Password;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
-@WebServlet(name = "UpdatePasswordServlet")
+@WebServlet(name = "UpdatePasswordServlet", urlPatterns = "/updatePassword")
 public class UpdatePasswordServlet extends HttpServlet {
     User profile;
     long profileId;
@@ -28,6 +29,7 @@ public class UpdatePasswordServlet extends HttpServlet {
         }
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String userId = request.getParameter("userId");
         String newPassword = request.getParameter("password");
         String confirmNewPassword = request.getParameter("confirm_password");
         //validate input
@@ -37,9 +39,13 @@ public class UpdatePasswordServlet extends HttpServlet {
         ArrayList<String> listOfErrors = new ArrayList<>();
 
         //check for error
-        if(newPassword != confirmNewPassword){
-            String passwordFieldIsEmpty = "Password and confirm password do not match.";
-            listOfErrors.add(passwordFieldIsEmpty);
+        if(!newPassword.equals(confirmNewPassword)){
+            String passwordsNotMatching = "Password and confirm password do not match.";
+            listOfErrors.add(passwordsNotMatching);
+            hasInputErrors = true;
+        } else if (newPassword.isEmpty() || confirmNewPassword.isEmpty()){
+            String passwordFieldEmpty = "Password or Confirm Password field empty.";
+            listOfErrors.add(passwordFieldEmpty);
             hasInputErrors = true;
         }
 
@@ -47,8 +53,8 @@ public class UpdatePasswordServlet extends HttpServlet {
             request.setAttribute("listOfErrors", listOfErrors);
             request.getRequestDispatcher("/WEB-INF/updateProfile.jsp").forward(request, response);
         } else {
-            profile.setPassword(newPassword);
-            DaoFactory.getUsersDao().updatePassword(profile);
+            newPassword = Password.hash(newPassword);
+            DaoFactory.getUsersDao().updatePassword(newPassword, userId);
             response.sendRedirect("/login");
         }
     }
