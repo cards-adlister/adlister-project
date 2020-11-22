@@ -5,7 +5,7 @@
         <div class="navbar-collapse">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <a class="navbar-brand" href="/ads">Adlister</a>
+                <a class="navbar-brand" href="/ads">Beyond Monopoly</a>
             </div>
             <ul class="nav navbar-nav navbar-right">
 
@@ -13,7 +13,7 @@
                     <c:when test="${sessionScope.user != null}">
                         <li>
                             <form action="/ads/search" class="form-inline" role="search" method="GET">
-                                <input id="search" name="search" class="form-control" type="search" placeholder="Search Ads"/>
+                                <input id="search" name="search" class="form-control" type="search" placeholder="Search Games"/>
                                 <button class="btn btn=outline-success" type="submit"><i class="fas fa-search">Search</i></button>
                             </form>
                         </li>
