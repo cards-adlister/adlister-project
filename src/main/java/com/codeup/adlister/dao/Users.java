@@ -7,11 +7,12 @@ public interface Users {
     Long insert(User user);
     User findByEmail(String email);
     User findById(long id);
-    public void updateUser(User user);
 
-    long updateUsername(String username, long id);
+    void updateUser(User user);
 
-    long updateEmail(String email, long id);
+    void updateUsername(String profile, String userId);
 
-    long updatePassword(String password, long id);
+    void updatePassword(String password, String userId);
+
+    void updateEmail(String newEmail, String userId);
 }
