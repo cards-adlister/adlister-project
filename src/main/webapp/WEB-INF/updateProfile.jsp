@@ -26,19 +26,23 @@
     <form action="/updateProfile" method="post">
         <div class="form-group">
             <label for="username">Username</label>
-            <input id="username" name="username" class="form-control" type="text" value="<%=username%>" aria-required="true" placeholder="Prior username: ${user.username}" >
+            <input id="username" name="username" class="form-control" type="text" value="<%=username%>" aria-required="true" placeholder="Prior username: ${user.username}" required>
+            <p class="text-danger">
+                <c:out value="${sessionScope.message}"/>
+                <c:remove var="message" scope="session"/>
+            </p>
         </div>
         <div class="form-group">
             <label for="email">Email</label>
-            <input id="email" name="email" class="form-control" type="text" value="<%=email%>" aria-required="true" placeholder="Prior email: ${user.email}" >
+            <input id="email" name="email" class="form-control" type="text" value="<%=email%>" aria-required="true" placeholder="Prior email: ${user.email}" required>
         </div>
         <div class="form-group">
             <label for="password">Password</label>
-            <input id="password" name="password" class="form-control" type="password" aria-required="true" >
+            <input id="password" name="password" class="form-control" type="password" aria-required="true" required>
         </div>
         <div class="form-group">
             <label for="confirm_password">Confirm Password</label>
-            <input id="confirm_password" name="confirm_password" class="form-control" type="password" aria-required="true" >
+            <input id="confirm_password" name="confirm_password" class="form-control" type="password" aria-required="true" required>
         </div>
 
         <input type="submit" class="btn btn-primary btn-block">
