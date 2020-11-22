@@ -170,13 +170,14 @@ public class MySQLAdsDao implements Ads {
         return ads;
     }
 
-    public long linkAdToCategory(int adId, int catId) {
+    @Override
+    public int linkAdToCategory(int adId, int catId) {
         try {
             String query = "INSERT INTO ad_category (ad_id, category_id) VALUES (?, ?)";
             PreparedStatement stmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             stmt.setInt(1, adId);
             stmt.setInt(2, catId);
-            return (long) stmt.executeUpdate();
+            return (int) stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException("Could not link ad to category!", e);
@@ -186,14 +187,14 @@ public class MySQLAdsDao implements Ads {
     @Override
     public List<Ad> searchAds(String search) {
         try {
-            String select = "SELECT * FROM ads where description LIKE CONCAT(\"%\", ?, \"%\") or title LIKE CONCAT(\"%\", ?, \"%\")";
+            String select = "SELECT * FROM ads where description LIKE CONCAT('%', ?, '%') or title LIKE CONCAT('%', ?, '%')";
             PreparedStatement stmt = connection.prepareStatement(select);
             stmt.setString(1, search);
             stmt.setString( 2, search);
             ResultSet rs = stmt.executeQuery();
             return createAdsFromResults(rs);
         } catch (SQLException e) {
-            throw new RuntimeException("No ads matched your search.", e);
+            throw new RuntimeException("Error retrieving all ads.", e);
         }
     }
 

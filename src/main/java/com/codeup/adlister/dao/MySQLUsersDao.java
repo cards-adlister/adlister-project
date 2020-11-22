@@ -89,7 +89,42 @@ public class MySQLUsersDao implements Users {
             throw new RuntimeException("Error updating profile", e);
         }
     }
+    public void updateUsername(String newUsername, String userId){
+        String query = "UPDATE users SET username = ? WHERE id = ?";
+        try{
+            PreparedStatement stmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            stmt.setString(1, newUsername);
+            stmt.setString(2, userId);
+            stmt.executeUpdate();
+        } catch (SQLException e){
+            throw new RuntimeException("Error updating profile", e);
+        }
+    }
 
+    public void updateEmail(String newEmail, String userId){
+        String query = "UPDATE users SET email = ? WHERE id = ?";
+        try{
+            PreparedStatement stmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            stmt.setString(1, newEmail);
+            stmt.setString(2, userId);
+            stmt.executeUpdate();
+        } catch (SQLException e){
+            throw new RuntimeException("Error updating profile", e);
+        }
+    }
+
+    public void updatePassword(String newPassword, String userId){
+
+        String query = "UPDATE users SET password = ? WHERE id = ?";
+        try{
+            PreparedStatement stmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            stmt.setString(1, newPassword);
+            stmt.setString(2, userId);
+            stmt.executeUpdate();
+        } catch (SQLException e){
+            throw new RuntimeException("Error updating profile", e);
+        }
+    }
     private User extractUser(ResultSet rs) throws SQLException {
         if (! rs.next()) {
             return null;

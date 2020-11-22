@@ -9,7 +9,9 @@
 <body>
     <jsp:include page="/WEB-INF/partials/navbar.jsp" />
     <div class="container">
-        <h1>Welcome to the Adlister!</h1>
+        <h1>Welcome to Beyond Monopoly!</h1>
     </div>
+
+<jsp:include page="WEB-INF/partials/scripts.jsp" />
 </body>
 </html>

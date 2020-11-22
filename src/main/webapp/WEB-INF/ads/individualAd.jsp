@@ -16,14 +16,21 @@
     </jsp:include>
 </head>
 <body>
-<jsp:include page="/WEB-INF/partials/navbar.jsp" />
-<div class="container">
-      <h1>${ad.title}</h1>
-        <img src="${ad.image}" style="height: 300px; width: 300px" alt="${ad.title}">
-        <div>Description: ${ad.description}</div>
-        <div>Price: <fmt:formatNumber value = "${ad.price}" type = "currency"/></div>
-        <div>Posted By: ${user.username}</div>
-    <a href="/ads" class="btn btn-primary">Back to Ads</a>
-</div>
+    <jsp:include page="/WEB-INF/partials/navbar.jsp" />
+    <div class="container">
+          <h1>${ad.title}</h1>
+            <img src="${ad.image}" style="height: 300px; width: 300px" alt="${ad.title}">
+            <div>Description: ${ad.description}</div>
+            <div>
+                <p> Price: <fmt:formatNumber value = "${ad.price}" type = "currency"/> </p>
+                <p> Category(s):
+                    <c:forEach var="c" items="${categories}">${c.getName()}  </c:forEach>
+                </p>
+            </div>
+            <div>Posted By: ${user.username}</div>
+        <a href="/ads" class="btn btn-primary">Back to Ads</a>
+    </div>
+
+    <jsp:include page="/WEB-INF/partials/scripts.jsp" />
 </body>
 </html>
