@@ -11,10 +11,10 @@
     <jsp:include page="/WEB-INF/partials/navbar.jsp" />
 
     <div class="container">
-        <h1>Here Are all the ads!</h1>
+        <h1>Here are all the games for sale!</h1>
 
         <c:forEach var="ad" items="${ads}" varStatus="loop">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="card" style="width: 18rem">
                     <img class="card-img-top" src="${ad.image}" alt="${ad.title}" style="width: 100px; height: 100px">
                     <div class="card-body">
