@@ -1,0 +1,10 @@
+* {
+    box-sizing: border-box;
+}
+body {
+    width: 100%;
+    height: 100vh;
+    background-color: #192728;
+    background-image: url("/img/ep_naturalblack.png");
+}
+/*-----------navbar---------------*/

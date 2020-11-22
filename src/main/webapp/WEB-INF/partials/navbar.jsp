@@ -4,13 +4,14 @@
     <div class="container-fluid">
         <div class="navbar-collapse">
             <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <a class="navbar-brand" href="/ads">Adlister</a>
-            </div>
+            <a class="navbar-brand" href="/ads">
+                <img src="/img/Beyond_Monopoly.png" width="90" height="30" class="d-inline-block align-top" alt="Beyond Monopoly Logo with game board">
+
+            </a>
             <ul class="nav navbar-nav navbar-right">
                 <c:choose>
                     <c:when test="${sessionScope.user != null}">
-                        <li><form action="/ads/search" class="form-inline" role="search" method="GET">
+                        <li><form action="/search" class="form-inline" role="search" method="GET">
                             <input id="search" name="search" class="form-control" type="search" placeholder="Search Ads"/>
                             <button class="btn btn=outline-success" type="submit"><i class="fas fa-search">Search</i></button>
                         </form>
