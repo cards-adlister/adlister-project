@@ -11,7 +11,6 @@ public class Ad {
     private String image;
     private List<Category> categories;
     private double price;
-    private List<Category> categories;
 
 
     public Ad(long id, long userId, String title, String description, String image, double price) {
@@ -74,8 +73,4 @@ public class Ad {
     public double getPrice() { return this.price; }
 
     public void setPrice(double price) { this.price = price; }
-
-    public List<Category> getCategories() { return this.categories; }
-
-    public void addCategory(Category category) { this.categories.add(category); }
 }

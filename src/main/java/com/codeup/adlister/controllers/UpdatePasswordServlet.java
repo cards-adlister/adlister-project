@@ -55,6 +55,8 @@ public class UpdatePasswordServlet extends HttpServlet {
         } else {
             newPassword = Password.hash(newPassword);
             DaoFactory.getUsersDao().updatePassword(newPassword, userId);
+            request.getSession().removeAttribute("user");
+            request.getSession().invalidate();
             response.sendRedirect("/login");
         }
     }

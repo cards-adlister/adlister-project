@@ -58,6 +58,8 @@ public class UpdateUsernameServlet extends HttpServlet {
             request.getRequestDispatcher("/WEB-INF/updateProfile.jsp").forward(request, response);
         } else {
             DaoFactory.getUsersDao().updateUsername(newUsername, userId);
+            request.getSession().removeAttribute("user");
+            request.getSession().invalidate();
             response.sendRedirect("/login");
         }
     }
