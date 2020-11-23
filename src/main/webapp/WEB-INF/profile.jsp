@@ -17,10 +17,10 @@
 
     <c:forEach var="ad" items="${ads}">
         <div class="col-md-6">
-            <h2><a href="/delete/${ad.id}">${ad.title}</a></h2>
-            <img src="${ad.image}"  style="height: 300px; width: 300px">
-            <p>${ad.description}</p>
-            <p><fmt:formatNumber value = "${ad.price}" type = "currency"/></p>
+            <h2 ><a class="card-title" href="/delete/${ad.id}">${ad.title}</a></h2>
+            <img src="${ad.image}"  style="height: 300px">
+            <p class="card-text">${ad.description}</p>
+            <p class="card-text"><fmt:formatNumber value = "${ad.price}" type = "currency"/></p>
         </div>
     </c:forEach>
 
