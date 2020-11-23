@@ -36,6 +36,7 @@ public class MySQLAdsDao implements Ads {
     }
 
     @Override
+<<<<<<< HEAD
     public List<Ad> userAds(long userId) {
         PreparedStatement stmt = null;
         try {
@@ -101,6 +102,8 @@ public class MySQLAdsDao implements Ads {
     }
 
     @Override
+=======
+>>>>>>> fc613a62857fe205549cf62f1a48c67d349cadc5
     public Long insert(Ad ad) {
         try {
             String insertQuery = "INSERT INTO ads(user_id, title, description, image, price) VALUES (?, ?, ?, ?, ?)";
@@ -137,6 +140,7 @@ public class MySQLAdsDao implements Ads {
         }
         return ads;
     }
+<<<<<<< HEAD
 
     //Function to view individual Ad
     private List<Ad> createAdFromResults(ResultSet rs) throws SQLException {
@@ -198,6 +202,8 @@ public class MySQLAdsDao implements Ads {
         }
     }
 
+=======
+>>>>>>> fc613a62857fe205549cf62f1a48c67d349cadc5
 }
 
 

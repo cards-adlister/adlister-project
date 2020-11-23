@@ -3,36 +3,32 @@ package com.codeup.adlister.controllers;
 import com.codeup.adlister.dao.DaoFactory;
 import com.codeup.adlister.models.User;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
-
-import java.util.ArrayList;
 
 @WebServlet(name = "controllers.RegisterServlet", urlPatterns = "/register")
 public class RegisterServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (request.getSession().getAttribute("user") != null) {
-            response.sendRedirect("/profile");
-            return;
-        }
         request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String username = request.getParameter("username");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String passwordConfirmation = request.getParameter("confirm_password");
 
-        //validate input
-        boolean hasInputErrors = false;
+        // validate input
+        boolean inputHasErrors = username.isEmpty()
+            || email.isEmpty()
+            || password.isEmpty()
+            || (! password.equals(passwordConfirmation));
 
+<<<<<<< HEAD
         //List of possible errors & responses
         ArrayList<String> listOfErrors = new ArrayList<>();
 
@@ -79,7 +75,16 @@ public class RegisterServlet extends HttpServlet {
             User user = new User(username, email, password);
             DaoFactory.getUsersDao().insert(user);
             response.sendRedirect("/login");
+=======
+        if (inputHasErrors) {
+            response.sendRedirect("/register");
+            return;
+>>>>>>> fc613a62857fe205549cf62f1a48c67d349cadc5
         }
 
+        // create and save a new user
+        User user = new User(username, email, password);
+        DaoFactory.getUsersDao().insert(user);
+        response.sendRedirect("/login");
     }
 }

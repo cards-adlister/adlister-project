@@ -2,6 +2,7 @@
 
 <nav class="navbar navbar-default">
     <div class="container-fluid">
+<<<<<<< HEAD
         <div class="navbar-collapse">
             <!-- Brand and toggle get grouped for better mobile display -->
 
@@ -39,5 +40,16 @@
                 </c:choose>
             </ul>
         </div><!-- /.navbar-collapse -->
+=======
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/ads">Adlister</a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="/login">Login</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+    </div><!-- /.navbar-collapse -->
+>>>>>>> fc613a62857fe205549cf62f1a48c67d349cadc5
     </div><!-- /.container-fluid -->
 </nav>
