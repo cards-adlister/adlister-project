@@ -6,6 +6,7 @@ body {
     height: 100vh;
     background-color: #192728;
     background-image: url("/img/ep_naturalblack.png");
+    font-size: 20px;
 }
 h1{
     font-family: 'Play', sans-serif;
@@ -22,12 +23,13 @@ h2{
 p, .card-text, h4{
     font-family: 'Roboto', sans-serif;
     color: white;
-    font-size: larger;
+    font-size: large;
 
 }
 label{
     font-family: 'Roboto', sans-serif;
     color: #04c1a8;
+    font-size: larger;
 }
 .btn-primary {
     color: white;

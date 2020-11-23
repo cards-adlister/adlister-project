@@ -16,7 +16,7 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/partials/navbar.jsp"/>
-<h2>The Ad:</h2>
+
 <div class="container">
     <form action="/delete/${ad.id}" method="POST">
         <div class="container">
@@ -24,10 +24,12 @@
             <img src="${ad.image}" style="height: 300px">
             <div class="card-text">${ad.description}</div>
             <div class="card-text"><fmt:formatNumber value = "${ad.price}" type = "currency"/></div>
-            <input type="submit" class="btn btn-info" value="Delete">
-            <a href="/update/${ad.id}"><button class="btn btn-info" type="button">Update</button></a>
+            <input type="submit" class="btn btn-info btn-primary" value="Delete">
+            <a href="/update/${ad.id}"><button class="btn btn-info btn-primary" type="button">Update</button></a>
         </div>
     </form>
 </div>
+
+<jsp:include page="/WEB-INF/partials/scripts.jsp" />
 </body>
 </html>

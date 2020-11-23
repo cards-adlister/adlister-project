@@ -89,58 +89,42 @@ public class MySQLUsersDao implements Users {
             throw new RuntimeException("Error updating profile", e);
         }
     }
-
-    @Override
-    public long updateUsername(String username, long id) {
-        try {
-            String query = "UPDATE users SET username = ? WHERE id = ?";
+    public void updateUsername(String newUsername, String userId){
+        String query = "UPDATE users SET username = ? WHERE id = ?";
+        try{
             PreparedStatement stmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            stmt.setString(1, username);
-            stmt.setLong(2, id);
+            stmt.setString(1, newUsername);
+            stmt.setString(2, userId);
             stmt.executeUpdate();
-            ResultSet rs = stmt.getGeneratedKeys();
-            if(rs.next())
-                return rs.getLong(1);
-        } catch (SQLException e) {
-            throw new RuntimeException("Error updating username", e);
+        } catch (SQLException e){
+            throw new RuntimeException("Error updating profile", e);
         }
-        return 0L;
     }
 
-    @Override
-    public long updateEmail(String email, long id) {
-        try {
-            String query = "UPDATE users SET email = ? WHERE id = ?";
+    public void updateEmail(String newEmail, String userId){
+        String query = "UPDATE users SET email = ? WHERE id = ?";
+        try{
             PreparedStatement stmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            stmt.setString(1, email);
-            stmt.setLong(2, id);
+            stmt.setString(1, newEmail);
+            stmt.setString(2, userId);
             stmt.executeUpdate();
-            ResultSet rs = stmt.getGeneratedKeys();
-            if(rs.next())
-                return rs.getLong(1);
-        } catch (SQLException e) {
-            throw new RuntimeException("Error updating email", e);
+        } catch (SQLException e){
+            throw new RuntimeException("Error updating profile", e);
         }
-        return 0L;
     }
 
-    @Override
-    public long updatePassword(String password, long id) {
-        try {
-            String query = "UPDATE users SET password = ? WHERE id = ?";
-            PreparedStatement stmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            stmt.setString(1, password);
-            stmt.setLong(2, id);
-            stmt.executeUpdate();
-            ResultSet rs = stmt.getGeneratedKeys();
-            if(rs.next())
-                return rs.getLong(1);
-        } catch (SQLException e) {
-            throw new RuntimeException("Error updating password", e);
-        }
-        return 0L;
-    }
+    public void updatePassword(String newPassword, String userId){
 
+        String query = "UPDATE users SET password = ? WHERE id = ?";
+        try{
+            PreparedStatement stmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            stmt.setString(1, newPassword);
+            stmt.setString(2, userId);
+            stmt.executeUpdate();
+        } catch (SQLException e){
+            throw new RuntimeException("Error updating profile", e);
+        }
+    }
     private User extractUser(ResultSet rs) throws SQLException {
         if (! rs.next()) {
             return null;
