@@ -15,7 +15,7 @@
 
     <c:forEach var="ad" items="${ads}">
         <div class="col-md-6">
-            <h2 ><a class="card-title" href="/search/${ad.id}">${ad.title}</a></h2>
+            <h2 ><a class="card-title" href="/ad/${ad.id}">${ad.title}</a></h2>
             <img src="${ad.image}"  style="height: 300px">
             <p class="card-text">${ad.description}</p>
         </div>

@@ -24,6 +24,15 @@
                         <li><a href="/logout">Logout</a></li>
                     </c:when>
                     <c:otherwise>
+<<<<<<< HEAD
+=======
+<%--                        <li>--%>
+<%--&lt;%&ndash;                        <form action="/ads/search" class="form-inline" role="search" method="GET">&ndash;%&gt;--%>
+<%--&lt;%&ndash;                            <input id="userSearch" name="search" class="form-control" type="search" placeholder="Search Games"/>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                            <button class="btn btn=outline-success" type="submit"><i class="fas fa-search">Search</i></button>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                        </form>&ndash;%&gt;--%>
+<%--                        </li>--%>
+>>>>>>> f5d80f334c8d8e833ecea21ab087f90fbf39d91b
                         <li><a href="/register">Register</a></li>
                         <li><a href="/login">Login</a></li>
                     </c:otherwise>
