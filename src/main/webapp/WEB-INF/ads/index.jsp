@@ -15,7 +15,7 @@
     <h1>Find your new favorite game</h1>
 </div>
     <c:forEach var="ad" items="${ads}" varStatus="loop">
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="card" style="width: 18rem">
                 <img class="card-img-top" src="${ad.image}" alt="${ad.title}" style=" height: 200px">
                 <div class="card-body">
