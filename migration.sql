@@ -47,6 +47,6 @@ CREATE TABLE ad_category
 (
     ad_id       int(10) unsigned NOT NULL,
     category_id int(10) unsigned NOT NULL,
-    FOREIGN KEY (ad_id) REFERENCES ads (id)
+    FOREIGN KEY (ad_id) REFERENCES ads (id),
     FOREIGN KEY (category_id) REFERENCES categories (id)
 );
