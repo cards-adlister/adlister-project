@@ -10,17 +10,18 @@
                 <img src="<c:url value="/img/BM_white.png"/>" height="65" class="d-inline-block align-top" alt="Beyond Monopoly Logo with game board">
             </a>
             <ul class="nav navbar-nav navbar-right">
-                <li><form action="/ads/search" class="form-inline" role="search" method="GET">
-                    <input id="search" name="search" class="form-control" type="search" placeholder="Search Games"/>
-                    <button class="btn btn=outline-success" type="submit"><i class="fas fa-search">Search</i></button>
-                </form>
+                <li>
+                    <form action="/ads/search" class="form-inline" role="search" method="GET">
+                        <input id="search" name="search" class="form-control" type="search" placeholder="Search Games"/>
+                        <button class="btn btn=outline-success" type="submit"><i class="fas fa-search">Search</i></button>
+                    </form>
                 </li>
                 <c:choose>
                     <c:when test="${sessionScope.user != null}">
                         <li><a href="/ads/create">Create Ad</a></li>
 <%--                        <li><a href="/profile">${sessionScope.user.username}</a> </li>--%>
 <!--                         <li><a href="/profile">My Profile</a> </li> -->
-                      <li><a href="/profile">${sessionScope.user.username}'s Profile</a> </li>
+                        <li><a href="/profile">${sessionScope.user.username}'s Profile</a> </li>
                         <li><a href="/logout">Logout</a></li>
                     </c:when>
                     <c:otherwise>
@@ -33,9 +34,6 @@
                         <li><a href="/register">Register</a></li>
                         <li><a href="/login">Login</a></li>
                     </c:otherwise>
-
-
-
                 </c:choose>
             </ul>
         </div><!-- /.navbar-collapse -->
