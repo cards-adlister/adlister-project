@@ -9,8 +9,6 @@
 </head>
 <body>
     <jsp:include page="/WEB-INF/partials/navbar.jsp" />
-
-
 <div class="container">
     <h1>Find your new favorite game</h1>
 </div>
@@ -25,12 +23,12 @@
                     <a href="/ad/${loop.index + 1}" class="btn btn-primary">View Info</a>
                 </div>
                 <br>
-
-        </c:forEach>
-    </div>
+            </div>
+        </div>
+    </c:forEach>
+</div>
 
     <jsp:include page="/WEB-INF/partials/scripts.jsp" />
-
 </body>
 
 </html>
