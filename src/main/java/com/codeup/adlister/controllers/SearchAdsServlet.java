@@ -21,6 +21,6 @@ public class SearchAdsServlet extends HttpServlet {
         System.out.println(adList);
         request.setAttribute("ads", adList);
 
-        request.getRequestDispatcher("/WEB-INF/ads/index.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/search.jsp").forward(request, response);
     }
 }
